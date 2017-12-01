@@ -47,6 +47,7 @@ function readJson() {
 	/**/
 	var oTable = $('#products').dataTable({
 		"bProcessing": true,
+		"bPaginate": false,
 		"sAjaxDataProp": "",
 		"ajax": {
 			"url": 'https://127.0.0.1:8000/app/data/data_output.json',
@@ -55,6 +56,14 @@ function readJson() {
             "cache": false,
             "contentType": "application/json; charset=utf-8"
 		},
+		'rowCallback': function(row, data, index){
+			//console.log(row);
+			data["actualPrice"] = data["actualPrice"].replace(/,/,'.');
+			data["listPrice"] = data["listPrice"].replace(/,/,'.');
+			if (parseFloat(data["actualPrice"]) > 5) {
+				$(row).find('td:eq(7)').css('background-color', "#FFC300");
+			}
+		},
 		"aoColumns": [
 			{'mData': 'shortDescription', 'sType': 'string', 'bVisible': true, 'bSearchable': false},
 			{'mData': 'size', 'sType': 'string', 'bVisible': true, 'bSearchable': false},
@@ -62,11 +71,11 @@ function readJson() {
 			{'mData': 'operatingSystem', 'sType': 'string', 'bVisible': true, 'bSearchable': false},
 			{'mData': 'iaas', 'sType': 'string', 'bVisible': true, 'bSearchable': false},
 			{'mData': 'priceUnit', 'sType': 'string', 'bVisible': true, 'bSearchable': false},
-			{'mData': 'listPrice', 'sType': 'string', 'bVisible': true, 'bSearchable': false},
-			{'mData': 'actualPrice', 'sType': 'string', 'bVisible': true, 'bSearchable': false}
+			{'mData': 'listPrice', 'sType': 'numeric', 'bVisible': true, 'bSearchable': false},
+			{'mData': 'actualPrice', 'sType': 'numeric', 'bVisible': true, 'bSearchable': false}
 		]
-		
 	});
+	//console.log(oTable);
 }
 </script>
 </html>
