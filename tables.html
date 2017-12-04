@@ -49,7 +49,7 @@ function readJson() {
 		"bProcessing": true,
 		"loadingRecords": "Loading...",
 		"processing": "Processing...",
-		"bFilter": false, // enable/disable searchbox
+		"bFilter": true, // enable/disable searchbox
 		"bPaginate": false,
 		"sAjaxDataProp": "",
 		"info": true, // enable/disable information under the table
@@ -74,24 +74,24 @@ function readJson() {
 			}
 		},
 		"aoColumns": [
-			{'mData': 'shortDescription'},
-			{'mData': 'size'},
-			{'mData': 'instanceType'},
-			{'mData': 'operatingSystem'},
-			{'mData': 'iaas'},
-			{'mData': 'priceUnit'},
-			{'mData': 'listPrice'},
-			{'mData': 'actualPrice'}
+			{'mData': 'shortDescription', 'bVisible': true, 'bSearchable': true},
+			{'mData': 'size', 'bVisible': true, 'bSearchable': false},
+			{'mData': 'instanceType', 'bVisible': true, 'bSearchable': false},
+			{'mData': 'operatingSystem', 'bVisible': true, 'bSearchable': true},
+			{'mData': 'iaas', 'bVisible': true, 'bSearchable': false},
+			{'mData': 'priceUnit', 'bVisible': true, 'bSearchable': false},
+			{'mData': 'listPrice', 'bVisible': true, 'bSearchable': false},
+			{'mData': 'actualPrice', 'bVisible': true, 'bSearchable': false}
 		],
 		"aoColumnDefs" : [
-			{'type': 'string', 'bVisible': true, 'bSearchable': true},
-			{'type': 'string', 'bVisible': true, 'bSearchable': false},
-			{'type': 'string', 'bVisible': true, 'bSearchable': true},
-			{'type': 'string', 'bVisible': true, 'bSearchable': false},
-			{'type': 'string', 'bVisible': true, 'bSearchable': false},
-			{'type': 'string', 'bVisible': true, 'bSearchable': false},
-			{'type': 'numeric', 'bVisible': true, 'bSearchable': false},
-			{'type': 'numeric', 'bVisible': true, 'bSearchable': false},
+			{'type': 'string'},
+			{'type': 'string'},
+			{'type': 'string'},
+			{'type': 'string'},
+			{'type': 'string'},
+			{'type': 'string'},
+			{'type': 'numeric'},
+			{'type': 'numeric'}
 		]
 	});
 	//console.log(oTable);
