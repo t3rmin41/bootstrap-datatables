@@ -47,8 +47,14 @@ function readJson() {
 	/**/
 	var oTable = $('#products').dataTable({
 		"bProcessing": true,
+		"loadingRecords": "Loading...",
+		"processing": "Processing...",
+		"bFilter": true,
 		"bPaginate": false,
 		"sAjaxDataProp": "",
+		"info": false,
+		"ordering": true,
+		"paging": false,
 		"ajax": {
 			"url": 'https://127.0.0.1:8000/app/data/data_output.json',
 			"type": "get",
@@ -58,21 +64,34 @@ function readJson() {
 		},
 		'rowCallback': function(row, data, index){
 			//console.log(row);
-			data["actualPrice"] = data["actualPrice"].replace(/,/,'.');
-			data["listPrice"] = data["listPrice"].replace(/,/,'.');
-			if (parseFloat(data["actualPrice"]) > 5) {
-				$(row).find('td:eq(7)').css('background-color', "#FFC300");
+			//data["actualPrice"] = data["actualPrice"].replace(/,/,'.');
+			//data["listPrice"] = data["listPrice"].replace(/,/,'.');
+			//if (parseFloat(data["actualPrice"]) > 500) {
+			//	$(row).find('td:eq(7)').css('background-color', "#FFC300");
+			//}
+			if (data["actualPrice"] > 500) {
+			    $(row).find('td:eq(7)').css('background-color', "#FFC300");
 			}
 		},
 		"aoColumns": [
-			{'mData': 'shortDescription', 'sType': 'string', 'bVisible': true, 'bSearchable': false},
-			{'mData': 'size', 'sType': 'string', 'bVisible': true, 'bSearchable': false},
-			{'mData': 'instanceType', 'sType': 'string', 'bVisible': true, 'bSearchable': false},
-			{'mData': 'operatingSystem', 'sType': 'string', 'bVisible': true, 'bSearchable': false},
-			{'mData': 'iaas', 'sType': 'string', 'bVisible': true, 'bSearchable': false},
-			{'mData': 'priceUnit', 'sType': 'string', 'bVisible': true, 'bSearchable': false},
-			{'mData': 'listPrice', 'sType': 'numeric', 'bVisible': true, 'bSearchable': false},
-			{'mData': 'actualPrice', 'sType': 'numeric', 'bVisible': true, 'bSearchable': false}
+			{'mData': 'shortDescription'},
+			{'mData': 'size'},
+			{'mData': 'instanceType'},
+			{'mData': 'operatingSystem'},
+			{'mData': 'iaas'},
+			{'mData': 'priceUnit'},
+			{'mData': 'listPrice'},
+			{'mData': 'actualPrice'}
+		],
+		"aoColumnDefs" : [
+			{'type': 'string', 'bVisible': true, 'bSearchable': true},
+			{'type': 'string', 'bVisible': true, 'bSearchable': false},
+			{'type': 'string', 'bVisible': true, 'bSearchable': true},
+			{'type': 'string', 'bVisible': true, 'bSearchable': false},
+			{'type': 'string', 'bVisible': true, 'bSearchable': false},
+			{'type': 'string', 'bVisible': true, 'bSearchable': false},
+			{'type': 'numeric', 'bVisible': true, 'bSearchable': false},
+			{'type': 'numeric', 'bVisible': true, 'bSearchable': false},
 		]
 	});
 	//console.log(oTable);
